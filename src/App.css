@@ -17,6 +17,7 @@
 .inline-block {
   display: inline-block;
 }
+
 /* *****************************GRID****************************** */
 .grid-row {
   display: grid;
@@ -25,6 +26,24 @@
 .grid-column {
   display: grid;
   grid-auto-flow: column;
+}
+
+/* *****************************JUSTIFY****************************** */
+.justify-content-center {
+  display: grid;
+  justify-content: center;
+}
+.justify-items-center {
+  display: grid;
+  justify-items: center;
+}
+.justify-self-center {
+  display: grid;
+  justify-self: center;
+}
+.justify-tracks-center {
+  display: grid;
+  justify-tracks: center;
 }
 
 /* *****************************POSITION****************************** */

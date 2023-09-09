@@ -1,14 +1,19 @@
-import React from 'react'
-import Input from './components/controls/Input'
-import useInputProps from './utils/hooks/useInputProps'
+import React from "react";
+import Input from "./components/controls/Input";
+import useInputProps from "./utils/hooks/useInputProps";
 //import './components/controls/input.css';
 
-const Styles = ({ children }) => <style>{children}</style>
+const Styles = ({ children }) => <style>{children}</style>;
 
 export default function CompoundExamples() {
-  const [inputProps, label, , error,] = useInputProps("number", "Weight", 0, (value) => value === 0 && "cannot be 0");
+  const [inputProps, label, , error] = useInputProps(
+    "number",
+    "Weight",
+    0,
+    (value) => value === 0 && "cannot be 0"
+  );
 
-  console.log('inputProps', inputProps);
+  console.log("inputProps", inputProps);
 
   return (
     <>
@@ -36,7 +41,12 @@ export default function CompoundExamples() {
           }
 
           .control {
-
+            input:invalid {
+              background-color: ivory;
+              border: none;
+              outline: 2px solid red;
+              border-radius: 5px;
+            }
           }
 
           .suffix {
@@ -45,15 +55,24 @@ export default function CompoundExamples() {
         `}
       </Styles>
       <Input.Group {...inputProps} error={error}>
-        <Input.Label className='label-hover block'><span>{label} {error}</span></Input.Label>
+        <Input.Label className="label-hover block">
+          <span>
+            {label} {error}
+          </span>
+        </Input.Label>
         <Input.Container>
-          <Input.Prefix><>KG</></Input.Prefix>
+          <Input.Prefix>
+            <>KG</>
+          </Input.Prefix>
           <Input.Control>
-            <input style={{ border: "none" }} />
+            <input style={{ border: "none" }} pattern={/w+/g} required />
           </Input.Control>
-          <Input.Suffix>&times;</Input.Suffix>
+          <Input.Suffix>
+            <>&times;</>
+          </Input.Suffix>
         </Input.Container>
+        <button type="submit">Submit</button>
       </Input.Group>
     </>
-  )
+  );
 }
