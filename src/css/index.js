@@ -5,7 +5,7 @@ export default function CSSExample() {
   const id = useId();
 
   function css(css) {
-    const cssSplit = css.split(" ");
+    const cssSplit = css.split(";");
     const cssFormat = cssSplit.map(
       (value) =>
         "." +
@@ -33,7 +33,29 @@ export default function CSSExample() {
     document.head.appendChild(style);
     return classNameFormat.join(" ");
   }
+
+  function test(css) {
+    let style = document.querySelector("#style");
+    if (!style) {
+      style = document.createElement("style");
+      style.id = "style";
+    }
+
+    style.innerHTML += `
+      .rename-me {
+        ${css[0]}
+      }
+    `;
+
+    document.head.appendChild(style);
+    return "rename-me";
+  }
   return (
-    <div className={css("display:grid justify-content:center")}>index</div>
+    // <div className={css("display:grid; justify-content:center; @media (min-width: 500px) {.justify-content: {justify-content:start}}")}>index</div>
+    <div
+      className={test`display:grid; justify-content:center; @media (min-width: 500px) {.rename-me: {justify-content:start}}`}
+    >
+      CSS
+    </div>
   );
 }

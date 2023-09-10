@@ -1,30 +1,36 @@
 import { useState } from "react";
 
 export default function useInputProps(
-  type,
-  label,
-  initialValue,
+  type = "text",
+  label = "",
+  initialValue = null,
+  pattern = "w+d+",
+  title = "",
+  required = true,
+  disabled = false,
+  readOnly = false,
   error = () => ""
 ) {
   const [value, setValue] = useState(initialValue);
   const [errorText, setErrorText] = useState(error(initialValue));
 
-  const handleChange = (e) => {
-    setErrorText(error(e.target.value));
-    e.target.setCustomValidity(setErrorText(error(e.target.value)));
-    setValue(e.target.value);
-  };
-  const handleErrorText = () => setErrorText(error(value));
-
   return [
     {
       type,
       value,
-      onChange: handleChange,
+      onChange: (e) => setValue(e.target.value),
+      pattern,
+      title,
+      onInvalid: (e) =>
+        setErrorText(e.target.validationMessage + " " + e.target.title),
+      onInput: (e) =>
+        setErrorText(e.target.validationMessage + " " + e.target.title),
+      required: required,
+      disabled: disabled,
+      readOnly: readOnly,
     },
     label,
     initialValue,
     errorText,
-    handleErrorText,
   ];
 }
