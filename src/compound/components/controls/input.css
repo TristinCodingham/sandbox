@@ -10,12 +10,20 @@ form:valid button[type="submit"] {
 
 .container {
   position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  background-color: #fff;
+  box-shadow: 0 0 10px #9f9f9f;
+  /* border: 1px solid #e4e4e4; */
+  /* border-radius: 4px; */
+  height: 30px;
+  width: 280px;
 }
 
 label {
   position: absolute;
   left: 15px;
-  top: -6px;
+  top: -10px;
   background-color: #5a5a5a;
   color: #fff;
   font-size: x-small;
@@ -24,79 +32,131 @@ label {
   border-radius: 4px;
 }
 
+.prefix,
+.suffix {
+  padding-inline: 10px;
+}
+/* 
+.container .prefix:last-of-type {
+  padding-right: 10px;
+}
+.container .suffix:last-of-type {
+  padding-right: 10px;
+} */
+
 input {
-  padding: 12px;
-  border: 1px solid #e4e4e4;
-  border-radius: 4px;
+  height: 100%;
+  width: 100%;
+  border: none;
+}
+
+/* .container:has(> .prefix) input {
+  padding-left: 40px;
+} */
+
+input:blank {
+  /* Used when input is blank */
+}
+
+input:checked {
+  /* Used when input checkbox is checked */
+}
+
+input:default {
+  /* Used when input is still its default value */
+}
+
+input:enabled {
+  /* An element is enabled if it can be activated (selected, clicked on, typed into, etc.) or accept focus */
+}
+
+input:focus {
+  /* Used when an input is focused */
+}
+
+input:focus-visible {
+  /* Used if the element has :focus and the UA (User Agent) determines via heuristics that the focus should be made evident on the element */
 }
 
 input:focus-within {
+  /* Used if the element or any of its descendants are focused. TIP: Use on the container */
   outline: none;
 }
 
+input:in-range {
+  /* Used when the input value is within range of the 'min' and 'max' constraints */
+}
+
+input:out-of-range {
+  /* Used when the input value isn't within range of the 'min' and 'max' constraints */
+}
+
+input:placeholder-shown {
+  /* Used when input has it's placeholder shown */
+}
+
+input:read-write {
+  /* Used when an input is editable by user */
+}
+
+input:valid {
+  /* Used when the input does not validate (Eg. when type="email" and value doesn't contain '@'. Or when value does not match 'pattern' attribute */
+  background-color: #c4ffd3;
+}
+
 input:invalid {
+  /* Used when the input does not validate (Eg. when type="email" and value doesn't contain '@'. Or when value does not match 'pattern' attribute */
   background-color: #ffdddd;
-  border: 1px solid #800000;
+}
+
+.container:has(input:invalid) {
+  /* background-color: #ffdddd; */
+  /* border: 1px solid #800000; */
+  box-shadow: 0 0 10px #800000;
   color: red;
 }
 
-input:optional {
+.container:has(input:optional) {
   border-left: 3px solid rgb(73, 255, 89);
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
+  /* border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px; */
 }
 
-input:required {
+.container:has(input:required) {
   border-left: 3px solid red;
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
+  /* border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px; */
 }
 
-input:read-only {
+.container:has(input:read-only) {
   border-left: 3px solid rgb(136, 136, 136);
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
+  /* border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px; */
 }
 
-input:disabled {
+.container:has(input:disabled) {
   border-left: 3px solid rgb(59, 59, 59);
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
+  /* border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px; */
 }
 
-input:required:valid {
+.container:has(input:required:valid) {
   border-left: 3px solid rgb(0, 131, 22);
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
+  /* border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px; */
 }
 
-input:invalid + .error {
+input:invalid ~ output {
+}
+
+.error {
   position: absolute;
-  bottom: -6px;
+  bottom: -10px;
   left: 15px;
   font-size: x-small;
-  background-color: #c9542d;
-  color: #fff;
   padding: 0 8px;
   border-radius: 4px;
-
-  &::after {
-    content: attr(data-error);
-  }
+  background-color: #c9542d;
+  color: #fff;
+  z-index: 10;
 }
-
-/* input:required:invalid {
-  border-color: #c00000;
-} */
-
-/* input:valid {
-  background-color: #ddffdd;
-} */
-
-/* form:invalid {
-  border: 5px solid #ffdddd;
-} */
-
-/* form:valid {
-  border: 5px solid #ddffdd;
-} */

@@ -1,0 +1,9 @@
+a:after {
+  content: " /";
+}
+a:first-child:before {
+  content: " » ";
+}
+a:last-child:after {
+  content: "";
+}

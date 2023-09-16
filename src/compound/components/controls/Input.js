@@ -21,7 +21,7 @@ function Group({ children, ...restProps }) {
 }
 
 function Label({ children, className = "" }) {
-  className = className + " label";
+  className = "label " + className;
   return Children.map(children, (child) =>
     cloneElement(child, {
       className: `${className} ${child?.props?.className || ""}`,
@@ -30,16 +30,12 @@ function Label({ children, className = "" }) {
 }
 
 function Container({ children, className = "" }) {
-  className = className + " container";
-  return Children.map(children, (child) =>
-    cloneElement(child, {
-      className: `${className} ${child?.props?.className || ""}`,
-    })
-  );
+  className = "container " + className;
+  return <div className={className}>{children}</div>;
 }
 
 function Prefix({ children, className = "" }) {
-  className = className + " prefix";
+  className = "prefix " + className;
   return Children.map(children, (child) =>
     cloneElement(child, {
       className: `${className} ${child?.props?.className || ""}`,
@@ -48,7 +44,7 @@ function Prefix({ children, className = "" }) {
 }
 
 function Control({ children, className = "" }) {
-  className = className + " control";
+  className = "control " + className;
   const inputProps = useInputContext();
 
   return Children.map(children, (child) =>
@@ -60,7 +56,16 @@ function Control({ children, className = "" }) {
 }
 
 function Suffix({ children, className = "" }) {
-  className = className + " suffix";
+  className = "suffix " + className;
+  return Children.map(children, (child) =>
+    cloneElement(child, {
+      className: `${className} ${child?.props?.className || ""}`,
+    })
+  );
+}
+
+function Output({ children, className = "" }) {
+  className = "output " + className;
   return Children.map(children, (child) =>
     cloneElement(child, {
       className: `${className} ${child?.props?.className || ""}`,
@@ -71,11 +76,12 @@ function Suffix({ children, className = "" }) {
 const Input = {
   Form,
   Group,
-  Label,
   Container,
+  Label,
   Prefix,
   Control,
   Suffix,
+  Output,
 };
 
 export default Input;

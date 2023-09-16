@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 export default function useInputProps(
   type = "text",
   label = "",
   initialValue = null,
-  pattern = "w+d+",
+  pattern = "",
   title = "",
   required = true,
   disabled = false,
@@ -14,23 +14,42 @@ export default function useInputProps(
   const [value, setValue] = useState(initialValue);
   const [errorText, setErrorText] = useState(error(initialValue));
 
-  return [
-    {
+  const onChange = useCallback((e) => setValue(e.target.value), []);
+  const onInvalid = useCallback(
+    (e) => setErrorText(e.target.validationMessage + " " + e.target.title),
+    []
+  );
+  const onInput = useCallback(
+    (e) => setErrorText(e.target.validationMessage + " " + e.target.title),
+    []
+  );
+
+  const inputProps = useMemo(
+    () => ({
       type,
       value,
-      onChange: (e) => setValue(e.target.value),
+      onChange,
       pattern,
       title,
-      onInvalid: (e) =>
-        setErrorText(e.target.validationMessage + " " + e.target.title),
-      onInput: (e) =>
-        setErrorText(e.target.validationMessage + " " + e.target.title),
+      onInvalid,
+      onInput,
       required: required,
       disabled: disabled,
       readOnly: readOnly,
-    },
-    label,
-    initialValue,
-    errorText,
-  ];
+    }),
+    [
+      disabled,
+      onChange,
+      onInput,
+      onInvalid,
+      pattern,
+      readOnly,
+      required,
+      title,
+      type,
+      value,
+    ]
+  );
+
+  return [inputProps, label, initialValue, errorText];
 }

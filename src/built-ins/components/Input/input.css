@@ -10,7 +10,19 @@ form:valid button[type="submit"] {
 
 .container {
   position: relative;
+  outline: 1px solid #cfcfcf;
 }
+
+/* .container::before {
+  content: "";
+  display: block;
+  height: 10px;
+  width: 10px;
+  --prefix: attr(data-prefix);
+  --url: url(var(--prefix));
+  mask-image: var(--url);
+  background-color: #333;
+} */
 
 label {
   position: absolute;
@@ -30,41 +42,88 @@ input {
   border-radius: 4px;
 }
 
+input:blank {
+  /* Used when input is blank */
+}
+
+input:checked {
+  /* Used when input checkbox is checked */
+}
+
+input:default {
+  /* Used when input is still its default value */
+}
+
+input:enabled {
+  /* An element is enabled if it can be activated (selected, clicked on, typed into, etc.) or accept focus */
+}
+
+input:focus {
+  /* Used when an input is focused */
+}
+
+input:focus-visible {
+  /* Used if the element has :focus and the UA (User Agent) determines via heuristics that the focus should be made evident on the element */
+}
+
 input:focus-within {
+  /* Used if the element or any of its descendants are focused. TIP: Use on the container */
   outline: none;
 }
 
+input:in-range {
+  /* Used when the input value is within range of the 'min' and 'max' constraints */
+}
+
+input:out-of-range {
+  /* Used when the input value isn't within range of the 'min' and 'max' constraints */
+}
+
+input:placeholder-shown {
+  /* Used when input has it's placeholder shown */
+}
+
+input:read-write {
+  /* Used when an input is editable by user */
+}
+
 input:invalid {
+  /* Used when the input does not validate (Eg. when type="email" and value doesn't contain '@'. Or when value does not match 'pattern' attribute */
   background-color: #ffdddd;
   border: 1px solid #800000;
   color: red;
 }
 
 input:optional {
+  /* Used when input does not have :required */
   border-left: 3px solid rgb(73, 255, 89);
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
 
 input:required {
+  /* Used when input has :required */
   border-left: 3px solid red;
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
 
 input:read-only {
+  /* Used when input has :read-only */
   border-left: 3px solid rgb(136, 136, 136);
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
 
 input:disabled {
+  /* Used when input has :disabled */
   border-left: 3px solid rgb(59, 59, 59);
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
 
 input:required:valid {
+  /* Used when the input validates (Eg. when type="email" and value contains '@'. Or when value matches 'pattern' attribute */
   border-left: 3px solid rgb(0, 131, 22);
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
@@ -84,19 +143,3 @@ input:invalid + .error {
     content: attr(data-error);
   }
 }
-
-/* input:required:invalid {
-  border-color: #c00000;
-} */
-
-/* input:valid {
-  background-color: #ddffdd;
-} */
-
-/* form:invalid {
-  border: 5px solid #ffdddd;
-} */
-
-/* form:valid {
-  border: 5px solid #ddffdd;
-} */
