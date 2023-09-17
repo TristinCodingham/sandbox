@@ -12,6 +12,7 @@ form:valid button[type="submit"] {
   position: relative;
   display: grid;
   grid-auto-flow: column;
+  align-items: center;
   background-color: #fff;
   box-shadow: 0 0 10px #9f9f9f;
   /* border: 1px solid #e4e4e4; */
@@ -32,10 +33,46 @@ label {
   border-radius: 4px;
 }
 
+.prefixes,
+.suffixes {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  height: 100%;
+  width: 0%;
+  position: absolute;
+  background-color: #fff;
+  transition: 200ms ease-out;
+
+  /* :not(:first-child) {
+    width: 0;
+    opacity: 0;
+    pointer-events: none;
+  } */
+
+  &:hover {
+    width: 100%;
+    /* :not(:first-child) {
+      opacity: 1;
+      pointer-events: all;
+    } */
+  }
+}
+
+.suffixes {
+  right: 0;
+}
+
 .prefix,
 .suffix {
-  padding-inline: 10px;
+  text-align: center;
 }
+
+/* .prefix,
+.suffix {
+  padding-inline: 10px;
+} */
+
 /* 
 .container .prefix:last-of-type {
   padding-right: 10px;

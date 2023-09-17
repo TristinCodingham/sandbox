@@ -20,55 +20,88 @@ function Group({ children, ...restProps }) {
   );
 }
 
-function Label({ children, className = "" }) {
-  className = "label " + className;
+function Label({ children, className = undefined }) {
+  const classNames = ["label", className];
+
   return Children.map(children, (child) =>
     cloneElement(child, {
-      className: `${className} ${child?.props?.className || ""}`,
+      className: [...classNames, child?.props?.className]
+        .filter((c) => c !== undefined)
+        .join(" "),
     })
   );
 }
 
-function Container({ children, className = "" }) {
-  className = "container " + className;
-  return <div className={className}>{children}</div>;
+function Container({ children, className = undefined }) {
+  const classNames = ["container", className];
+  return (
+    <div className={classNames.filter((c) => c !== undefined).join(" ")}>
+      {children}
+    </div>
+  );
 }
 
-function Prefix({ children, className = "" }) {
-  className = "prefix " + className;
+function Prefixes({ children, className = undefined }) {
+  const classNames = ["prefixes", className];
+  return (
+    <div className={classNames.filter((c) => c !== undefined).join(" ")}>
+      {children}
+    </div>
+  );
+}
+
+function Prefix({ children, className = undefined }) {
+  const classNames = ["prefix", className];
   return Children.map(children, (child) =>
     cloneElement(child, {
-      className: `${className} ${child?.props?.className || ""}`,
+      className: [...classNames, child?.props?.className]
+        .filter((c) => c !== undefined)
+        .join(" "),
     })
   );
 }
 
-function Control({ children, className = "" }) {
-  className = "control " + className;
+function Control({ children, className = undefined }) {
+  const classNames = ["control", className];
   const inputProps = useInputContext();
 
   return Children.map(children, (child) =>
     cloneElement(child, {
       ...inputProps,
-      className: `${className} ${child?.props?.className || ""}`,
+      className: [...classNames, child?.props?.className]
+        .filter((c) => c !== undefined)
+        .join(" "),
     })
   );
 }
 
-function Suffix({ children, className = "" }) {
-  className = "suffix " + className;
+function Suffixes({ children, className = undefined }) {
+  const classNames = ["suffixes", className];
+  return (
+    <div className={classNames.filter((c) => c !== undefined).join(" ")}>
+      {children}
+    </div>
+  );
+}
+
+function Suffix({ children, className = undefined }) {
+  const classNames = ["suffix", className];
   return Children.map(children, (child) =>
     cloneElement(child, {
-      className: `${className} ${child?.props?.className || ""}`,
+      className: [...classNames, child?.props?.className]
+        .filter((c) => c !== undefined)
+        .join(" "),
     })
   );
 }
 
-function Output({ children, className = "" }) {
-  className = "output " + className;
+function Output({ children, className = undefined }) {
+  const classNames = ["output", className];
   return Children.map(children, (child) =>
     cloneElement(child, {
-      className: `${className} ${child?.props?.className || ""}`,
+      className: [...classNames, child?.props?.className]
+        .filter((c) => c !== undefined)
+        .join(" "),
     })
   );
 }
@@ -78,8 +111,10 @@ const Input = {
   Group,
   Container,
   Label,
+  Prefixes,
   Prefix,
   Control,
+  Suffixes,
   Suffix,
   Output,
 };
